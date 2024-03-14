@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { UserButton, auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-
+import { SignInButton } from "@clerk/nextjs";
 const Header = () => {
   const { userId } = auth();
 
@@ -31,7 +31,13 @@ const Header = () => {
           </ul>
         </div>
 
-        {userId ? <UserButton /> : <Button>Get Started</Button>}
+        {userId ? (
+          <UserButton />
+        ) : (
+          <Button>
+            <SignInButton />
+          </Button>
+        )}
       </div>
     </div>
   );
