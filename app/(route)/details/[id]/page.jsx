@@ -1,19 +1,18 @@
-import { currentUser } from "@clerk/nextjs";
 import Details from "./_components/Detail";
 
-const Page = async ({ params }) => {
-  const user = await currentUser();
-  console.log(user);
+const Page = ({ params }) => {
+  // بريد إلكتروني وهمي لتمريره للمكونات الابناء
+  const mockUserEmail = "guest@example.com";
+
   return (
     <>
-      {user ? (
-        <Details
-          params={params}
-          userEmail={user.emailAddresses[0].emailAddress}
-        />
-      ) : (
-        ""
-      )}
+      {/* بما أننا نستخدم بيانات وهمية، سنقوم بعرض المكون مباشرة 
+        دون التحقق من المستخدم (user?) لأننا نفترض أنه مسجل الدخول 
+      */}
+      <Details 
+        params={params} 
+        userEmail={mockUserEmail} 
+      />
     </>
   );
 };

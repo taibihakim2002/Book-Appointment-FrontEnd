@@ -1,41 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-const DoctorCard = ({ doctor }) => {
+function DoctorCard({ doctor }) {
   return (
-    <div
-      className="border-[1px] p-4 rounded-lg hover:border-primary transition-all group"
-      key={doctor.id}
-    >
-      <div className="h-[200px] overflow-hidden mb-2">
-        <Image
-          className="h-[200px] object-cover rounded-sm  group-hover:scale-105 transition-all"
-          src={doctor.attributes.Image.data.attributes.url}
-          width={600}
-          height={200}
-          alt="Doctor Image"
-        />
-      </div>
-      <div className="flex flex-col justify-between">
-        <div className="flex flex-col gap-2">
-          <p className="text-[11px] bg-blue-50 p-2 px-3 w-fit rounded-full text-primary">
-            {doctor.attributes.category.data.attributes.Name}
-          </p>
-          <h3 className="font-bold">{doctor.attributes.Name}</h3>
-          <p className="text-primary">{doctor.attributes.Year_of_experience}</p>
-          <p className="text-gray-400 font-light line-clamp-1 text-[15px]">
-            {doctor.attributes.Address}
-          </p>
-        </div>
-        <Link
-          href={"/details/" + doctor.id}
-          className="text-center p-1 border-primary border-[1px] rounded-full text-primary mt-3 hover:bg-primary hover:text-white transition-all"
-        >
-          Book Now
+    <div className="border-[1px] rounded-lg p-3 cursor-pointer hover:border-primary hover:shadow-sm transition-all group bg-white">
+      <Image
+        src={doctor.image} // هنا التغيير: نستخدم المسار المباشر للصورة
+        alt={doctor.name}
+        width={500}
+        height={200}
+        className="h-[200px] w-full object-cover rounded-lg group-hover:scale-105 transition-all"
+      />
+      
+      <div className="mt-3 items-baseline flex flex-col gap-2">
+        <span className="text-[10px] bg-blue-100 p-1 rounded-full px-2 text-primary font-bold">
+          {doctor.category}
+        </span>
+        
+        <h2 className="font-bold text-lg">{doctor.name}</h2>
+        
+        <h2 className="text-primary text-sm font-medium">
+          {doctor.year_of_experience} Experience
+        </h2>
+        
+        <h2 className="text-gray-500 text-sm flex items-center gap-1">
+            {/* يمكنك إضافة أيقونة موقع هنا */}
+           📍 New York, USA
+        </h2>
+
+        <Link href={`/details/${doctor.id}`} className="w-full">
+           <Button className="w-full rounded-full mt-2" variant="outline">Book Now</Button>
         </Link>
       </div>
     </div>
   );
-};
+}
 
 export default DoctorCard;
